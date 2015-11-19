@@ -54,15 +54,7 @@ namespace MarcelJoachimKloubert.IO
 
         #endregion Constructors (1)
 
-        #region Methods (3)
-
-        /// <inheriteddoc />
-        public override void Close()
-        {
-            base.Close();
-
-            DeleteMe(new FileInfo(Name));
-        }
+        #region Methods (2)
 
         /// <summary>
         /// Deletes that file.
@@ -102,6 +94,6 @@ namespace MarcelJoachimKloubert.IO
             }
         }
 
-        #endregion Methods (3)
+        #endregion Methods (2)
     }
 }

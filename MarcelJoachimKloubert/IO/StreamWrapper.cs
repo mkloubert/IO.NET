@@ -33,8 +33,6 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Runtime.Remoting;
-using System.Threading;
 
 namespace MarcelJoachimKloubert.IO
 {
@@ -149,55 +147,12 @@ namespace MarcelJoachimKloubert.IO
 
         #endregion Properties (9)
 
-        #region Methods (23)
-
-        /// <inheriteddoc />
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
-        {
-            return _BASE_STREAM.BeginRead(buffer, offset, count, callback, state);
-        }
-
-        /// <inheriteddoc />
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
-        {
-            return _BASE_STREAM.BeginWrite(buffer, offset, count, callback, state);
-        }
-
-        /// <inheriteddoc />
-        public override void Close()
-        {
-            _BASE_STREAM.Close();
-        }
-
-        /// <inheriteddoc />
-        public override ObjRef CreateObjRef(Type requestedType)
-        {
-            return _BASE_STREAM.CreateObjRef(requestedType);
-        }
-
-        /// <inheriteddoc />
-        [Obsolete]
-        protected override WaitHandle CreateWaitHandle()
-        {
-            return InvokeProtectedMethod((wrapper) => wrapper.CreateWaitHandle());
-        }
+        #region Methods (14)
 
         /// <inheriteddoc />
         protected override void Dispose(bool disposing)
         {
             InvokeProtectedMethod((wrapper) => wrapper.Dispose(disposing));
-        }
-
-        /// <inheriteddoc />
-        public override int EndRead(IAsyncResult asyncResult)
-        {
-            return _BASE_STREAM.EndRead(asyncResult);
-        }
-
-        /// <inheriteddoc />
-        public override void EndWrite(IAsyncResult asyncResult)
-        {
-            _BASE_STREAM.EndWrite(asyncResult);
         }
 
         /// <inheriteddoc />
@@ -239,12 +194,6 @@ namespace MarcelJoachimKloubert.IO
         public override int GetHashCode()
         {
             return _BASE_STREAM.GetHashCode();
-        }
-
-        /// <inheriteddoc />
-        public override object InitializeLifetimeService()
-        {
-            return _BASE_STREAM.InitializeLifetimeService();
         }
 
         /// <summary>
@@ -332,12 +281,6 @@ namespace MarcelJoachimKloubert.IO
         }
 
         /// <inheriteddoc />
-        protected override void ObjectInvariant()
-        {
-            InvokeProtectedMethod((wrapper) => wrapper.ObjectInvariant());
-        }
-
-        /// <inheriteddoc />
         public override int Read(byte[] buffer, int offset, int count)
         {
             return _BASE_STREAM.Read(buffer, offset, count);
@@ -379,6 +322,6 @@ namespace MarcelJoachimKloubert.IO
             _BASE_STREAM.WriteByte(value);
         }
 
-        #endregion Methods (23)
+        #endregion Methods (14)
     }
 }

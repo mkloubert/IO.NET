@@ -48,8 +48,6 @@ namespace MarcelJoachimKloubert.IO
         /// </summary>
         protected readonly ICollection<Stream> _STREAMS;
 
-        private readonly object _SYNC_ROOT;
-
         #endregion Fields (3)
 
         #region Constructors (1)
@@ -65,7 +63,7 @@ namespace MarcelJoachimKloubert.IO
         {
             _OWNS_STREAMS = ownsStreams;
 
-            _SYNC_ROOT = syncRoot ?? new object();
+            SyncRoot = syncRoot ?? new object();
             _STREAMS = CreateStreamCollection() ?? new List<Stream>();
         }
 
@@ -74,10 +72,7 @@ namespace MarcelJoachimKloubert.IO
         #region Properties (6)
 
         /// <inheriteddoc />
-        public override bool CanRead
-        {
-            get { return false; }
-        }
+        public override bool CanRead => false;
 
         /// <inheriteddoc />
         public override bool CanSeek
@@ -133,14 +128,11 @@ namespace MarcelJoachimKloubert.IO
         /// <summary>
         /// Gets the object for thread safe operations.
         /// </summary>
-        public object SyncRoot
-        {
-            get { return _SYNC_ROOT; }
-        }
+        public object SyncRoot { get; }
 
         #endregion Properties (6)
 
-        #region Methods (15)
+        #region Methods (14)
 
         /// <summary>
         /// Adds a stream.
@@ -157,17 +149,6 @@ namespace MarcelJoachimKloubert.IO
             }
 
             _STREAMS.Add(stream);
-        }
-
-        /// <inheriteddoc />
-        public override void Close()
-        {
-            if (!_OWNS_STREAMS)
-            {
-                return;
-            }
-
-            InvokeForStreams(stream => stream.Close());
         }
 
         /// <summary>
@@ -261,10 +242,10 @@ namespace MarcelJoachimKloubert.IO
                         return (object)null;
                     },
                 funcState: new
-                    {
-                        Action = action,
-                        StateFactory = actionStateFactory,
-                    });
+                {
+                    Action = action,
+                    StateFactory = actionStateFactory,
+                });
         }
 
         /// <summary>
@@ -423,6 +404,6 @@ namespace MarcelJoachimKloubert.IO
                              });
         }
 
-        #endregion Methods (15)
+        #endregion Methods (14)
     }
 }

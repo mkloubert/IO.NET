@@ -32,6 +32,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MarcelJoachimKloubert.IO
 {
@@ -68,7 +69,7 @@ namespace MarcelJoachimKloubert.IO
 
         #endregion Constructors (1)
 
-        #region Methods (46)
+        #region Methods (45)
 
         /// <summary>
         /// Adds a new writer.
@@ -85,17 +86,6 @@ namespace MarcelJoachimKloubert.IO
             }
 
             _WRITERS.Add(writer);
-        }
-
-        /// <inheriteddoc />
-        public override void Close()
-        {
-            if (!_OWNS_WRITERS)
-            {
-                return;
-            }
-
-            InvokeForWriters(writer => writer.Close());
         }
 
         /// <summary>
@@ -438,7 +428,7 @@ namespace MarcelJoachimKloubert.IO
                                  Format = format,
                              });
         }
-
+        
         /// <inheriteddoc />
         public override void WriteLine()
         {
@@ -595,7 +585,7 @@ namespace MarcelJoachimKloubert.IO
         /// <inheriteddoc />
         public override Encoding Encoding
         {
-            get { return InvokeForWriters(w => w.Encoding).Distinct().SingleOrDefault() ?? Encoding.Default; }
+            get { return InvokeForWriters(w => w.Encoding).Distinct().SingleOrDefault() ?? Encoding.UTF8; }
         }
 
         /// <inheriteddoc />

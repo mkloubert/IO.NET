@@ -78,7 +78,7 @@ namespace MarcelJoachimKloubert.IO
         /// <paramref name="count" /> is less than 0 and/or <paramref name="blockSize" /> is less than 1.
         /// </exception>
         public DestroyableStream(TStream baseStream,
-                                 int count = 1, int blockSize = 8192, bool flushAfterWrite = true,
+                                 int count = 3, int blockSize = 8192, bool flushAfterWrite = true,
                                  object syncRoot = null)
             : base(baseStream: baseStream,
                    syncRoot: syncRoot)
@@ -112,14 +112,14 @@ namespace MarcelJoachimKloubert.IO
                 return;
             }
 
-            var startPosition = 0;
+            const int START_POSITION = 0;
             var len = Length;
 
             for (var i = 0; i < _COUNT; i++)
             {
-                Position = startPosition;
+                Position = START_POSITION;
 
-                byte byteToWrite = 0;
+                byte byteToWrite;
                 switch (i % 3)
                 {
                     case 0:
@@ -128,6 +128,10 @@ namespace MarcelJoachimKloubert.IO
 
                     case 2:
                         byteToWrite = 151;
+                        break;
+
+                    default:
+                        byteToWrite = 0;
                         break;
                 }
 
@@ -205,10 +209,10 @@ namespace MarcelJoachimKloubert.IO
         /// <paramref name="count" /> is less than 0 and/or <paramref name="blockSize" /> is less than 1.
         /// </exception>
         public DestroyableStream(Stream baseStream,
-                                 int count = 1, int blockSize = 8192, bool flushAfterWrite = true,
+                                 int count = 3, int blockSize = 8192, bool flushAfterWrite = true,
                                  object syncRoot = null)
             : base(baseStream: baseStream,
-                   count: count, blockSize: blockSize, flushAfterWrite: flushAfterWrite, 
+                   count: count, blockSize: blockSize, flushAfterWrite: flushAfterWrite,
                    syncRoot: syncRoot)
         {
         }

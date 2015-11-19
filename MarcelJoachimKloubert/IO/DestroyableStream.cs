@@ -179,9 +179,9 @@ namespace MarcelJoachimKloubert.IO
         {
             try
             {
-                base.Dispose(disposing);
-
                 DestroyMe();
+
+                base.Dispose(disposing);
             }
             catch (Exception)
             {

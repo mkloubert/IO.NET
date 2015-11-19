@@ -67,6 +67,7 @@ namespace MarcelJoachimKloubert.IO
         /// <summary>
         /// Deletes that file.
         /// </summary>
+        /// <param name="file">The object that describes the current file.</param>
         protected virtual void DeleteMe(FileInfo file)
         {
             if (!file.Exists)

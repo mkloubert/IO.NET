@@ -60,6 +60,7 @@
     <Compile Include="IO\AsyncAggregateTextWriter.WriterExecutionContext.cs">
       <DependentUpon>AsyncAggregateTextWriter.cs</DependentUpon>
     </Compile>
+    <Compile Include="IO\DestroyableStream.cs" />
     <Compile Include="IO\StreamWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

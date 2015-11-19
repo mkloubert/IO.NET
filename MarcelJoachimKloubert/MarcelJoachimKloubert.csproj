@@ -117,6 +117,7 @@
     <Compile Include="IO\AsyncAggregateStreamWriter.StreamExecutionContext.cs" />
     <Compile Include="IO\AsyncAggregateTextWriter.cs" />
     <Compile Include="IO\AsyncAggregateTextWriter.WriterExecutionContext.cs" />
+    <Compile Include="IO\DestroyableStream.cs" />
     <Compile Include="IO\StreamWrapper.cs" />
     <Compile Include="IO\TempFileStream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

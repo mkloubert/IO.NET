@@ -71,11 +71,6 @@ namespace MarcelJoachimKloubert.IO
                 throw new ArgumentNullException(nameof(funcStateFactory));
             }
 
-            if (funcStateFactory == null)
-            {
-                throw new ArgumentNullException("funcStateFactory");
-            }
-
             var result = new List<TResult>();
 
             var exceptions = new List<Exception>();

@@ -595,7 +595,7 @@ namespace MarcelJoachimKloubert.IO
         /// <inheriteddoc />
         public override Encoding Encoding
         {
-            get { return InvokeForWriters(w => w.Encoding).Distinct().SingleOrDefault() ?? Encoding.Default; }
+            get { return InvokeForWriters(w => w.Encoding).Distinct().SingleOrDefault() ?? Encoding.UTF8; }
         }
 
         /// <inheriteddoc />

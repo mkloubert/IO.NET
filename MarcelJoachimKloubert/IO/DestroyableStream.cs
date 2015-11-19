@@ -36,7 +36,7 @@ namespace MarcelJoachimKloubert.IO
     #region CLASS: DestroyableStream<TStream>
 
     /// <summary>
-    /// Describes a stream that will be destroyed / shreddered after it has been closed.
+    /// A stream that will be destroyed / shreddered after it has been closed.
     /// </summary>
     /// <typeparam name="TStream">Type of the wrapped stream.</typeparam>
     public class DestroyableStream<TStream> : StreamWrapper<TStream>
@@ -203,7 +203,7 @@ namespace MarcelJoachimKloubert.IO
     #region CLASS: DestroyableStream
 
     /// <summary>
-    /// Describes a stream that will be destroyed / shreddered after it has been closed.
+    /// A stream that will be destroyed / shreddered after it has been closed.
     /// </summary>
     public class DestroyableStream : DestroyableStream<Stream>
     {
@@ -213,12 +213,21 @@ namespace MarcelJoachimKloubert.IO
         /// Initializes a new instance of the <see cref="DestroyableStream" /> class.
         /// </summary>
         /// <param name="baseStream">The base stream.</param>
+        /// <param name="count">The number of write operations.</param>
+        /// <param name="blockSize">The blocksize to use.</param>
+        /// <param name="flushAfterWrite">Flush after each write operation or not.</param>
         /// <param name="syncRoot">The custom object for thread safe operations.</param>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="baseStream" /> is <see langword="null" />.
         /// </exception>
-        public DestroyableStream(Stream baseStream, object syncRoot = null)
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="count" /> is less than 0 and/or <paramref name="blockSize" /> is less than 1.
+        /// </exception>
+        public DestroyableStream(Stream baseStream,
+                                 int count = 1, int blockSize = 8192, bool flushAfterWrite = true,
+                                 object syncRoot = null)
             : base(baseStream: baseStream,
+                   count: count, blockSize: blockSize, flushAfterWrite: flushAfterWrite, 
                    syncRoot: syncRoot)
         {
         }

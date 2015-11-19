@@ -63,7 +63,12 @@ namespace MarcelJoachimKloubert.IO
         {
             if (func == null)
             {
-                throw new ArgumentNullException("func");
+                throw new ArgumentNullException(nameof(func));
+            }
+
+            if (funcStateFactory == null)
+            {
+                throw new ArgumentNullException(nameof(funcStateFactory));
             }
 
             var result = new List<TResult>();

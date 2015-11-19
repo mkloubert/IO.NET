@@ -85,12 +85,12 @@ namespace MarcelJoachimKloubert.IO
         {
             if (count < 0)
             {
-                throw new ArgumentOutOfRangeException("count");
+                throw new ArgumentOutOfRangeException(nameof(count));
             }
 
             if (blockSize < 1)
             {
-                throw new ArgumentOutOfRangeException("blockSize");
+                throw new ArgumentOutOfRangeException(nameof(blockSize));
             }
 
             _BLOCK_SIZE = blockSize;

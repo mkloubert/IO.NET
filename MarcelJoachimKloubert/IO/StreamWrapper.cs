@@ -46,7 +46,6 @@ namespace MarcelJoachimKloubert.IO
         #region Fields (2)
 
         private readonly TStream _BASE_STREAM;
-        private readonly object _SYNC_ROOT;
 
         #endregion Fields (2)
 
@@ -64,10 +63,10 @@ namespace MarcelJoachimKloubert.IO
         {
             if (baseStream == null)
             {
-                throw new ArgumentNullException("baseStream");
+                throw new ArgumentNullException(nameof(baseStream));
             }
 
-            _SYNC_ROOT = syncRoot ?? new object();
+            SyncRoot = syncRoot ?? new object();
             _BASE_STREAM = baseStream;
         }
 
@@ -78,40 +77,22 @@ namespace MarcelJoachimKloubert.IO
         /// <summary>
         /// Gets the wrapped stream.
         /// </summary>
-        public TStream BaseStream
-        {
-            get { return _BASE_STREAM; }
-        }
+        public TStream BaseStream => _BASE_STREAM;
 
         /// <inheriteddoc />
-        public override bool CanRead
-        {
-            get { return _BASE_STREAM.CanRead; }
-        }
+        public override bool CanRead => _BASE_STREAM.CanRead;
 
         /// <inheriteddoc />
-        public override bool CanSeek
-        {
-            get { return _BASE_STREAM.CanSeek; }
-        }
+        public override bool CanSeek => _BASE_STREAM.CanSeek;
 
         /// <inheriteddoc />
-        public override bool CanTimeout
-        {
-            get { return _BASE_STREAM.CanTimeout; }
-        }
+        public override bool CanTimeout => _BASE_STREAM.CanTimeout;
 
         /// <inheriteddoc />
-        public override bool CanWrite
-        {
-            get { return _BASE_STREAM.CanWrite; }
-        }
+        public override bool CanWrite => _BASE_STREAM.CanWrite;
 
         /// <inheriteddoc />
-        public override long Length
-        {
-            get { return _BASE_STREAM.Length; }
-        }
+        public override long Length => _BASE_STREAM.Length;
 
         /// <inheriteddoc />
         public override long Position
@@ -132,10 +113,7 @@ namespace MarcelJoachimKloubert.IO
         /// <summary>
         /// Gets the object that is used for thread safe operations.
         /// </summary>
-        public object SyncRoot
-        {
-            get { return _SYNC_ROOT; }
-        }
+        public object SyncRoot { get; }
 
         /// <inheriteddoc />
         public override int WriteTimeout
@@ -176,12 +154,7 @@ namespace MarcelJoachimKloubert.IO
         /// </returns>
         protected static object[] GetArgumentValues(IEnumerable<Expression> args)
         {
-            if (args == null)
-            {
-                return null;
-            }
-
-            return args.Select(x =>
+            return args?.Select(x =>
                 {
                     var argAsObj = Expression.Convert(x, typeof(object));
 
@@ -214,7 +187,7 @@ namespace MarcelJoachimKloubert.IO
         {
             if (expr == null)
             {
-                throw new ArgumentNullException("expr");
+                throw new ArgumentNullException(nameof(expr));
             }
 
             var methodCall = (MethodCallExpression)expr.Body;
@@ -256,7 +229,7 @@ namespace MarcelJoachimKloubert.IO
         {
             if (expr == null)
             {
-                throw new ArgumentNullException("expr");
+                throw new ArgumentNullException(nameof(expr));
             }
 
             var methodCall = (MethodCallExpression)expr.Body;

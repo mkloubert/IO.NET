@@ -44,7 +44,6 @@ namespace MarcelJoachimKloubert.IO
         #region Fields (3)
 
         private readonly bool _OWNS_WRITERS;
-        private readonly object _SYNC_ROOT;
 
         /// <summary>
         /// Stores the underlying writers.
@@ -62,7 +61,7 @@ namespace MarcelJoachimKloubert.IO
         /// <param name="syncRoot">The custom object for thread safe operations.</param>
         public AggregateTextWriter(bool ownsWriters = false, object syncRoot = null)
         {
-            _SYNC_ROOT = syncRoot ?? new object();
+            SyncRoot = syncRoot ?? new object();
             _OWNS_WRITERS = ownsWriters;
             _WRITERS = CreateWriterStorage() ?? new List<TextWriter>();
         }
@@ -609,10 +608,7 @@ namespace MarcelJoachimKloubert.IO
         /// <summary>
         /// Gets the object for thread safe operations.
         /// </summary>
-        public object SyncRoot
-        {
-            get { return _SYNC_ROOT; }
-        }
+        public object SyncRoot { get; }
 
         #endregion Properties (4)
     }

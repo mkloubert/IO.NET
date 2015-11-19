@@ -140,7 +140,7 @@ namespace MarcelJoachimKloubert.IO
 
         #endregion Properties (6)
 
-        #region Methods (15)
+        #region Methods (14)
 
         /// <summary>
         /// Adds a stream.
@@ -157,17 +157,6 @@ namespace MarcelJoachimKloubert.IO
             }
 
             _STREAMS.Add(stream);
-        }
-
-        /// <inheriteddoc />
-        public override void Close()
-        {
-            if (!_OWNS_STREAMS)
-            {
-                return;
-            }
-
-            InvokeForStreams(stream => stream.Close());
         }
 
         /// <summary>

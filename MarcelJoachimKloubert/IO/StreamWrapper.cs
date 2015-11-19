@@ -33,7 +33,6 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Runtime.Remoting;
 using System.Threading;
 
 namespace MarcelJoachimKloubert.IO
@@ -149,7 +148,7 @@ namespace MarcelJoachimKloubert.IO
 
         #endregion Properties (9)
 
-        #region Methods (23)
+        #region Methods (18)
 
         /// <inheriteddoc />
         public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
@@ -161,25 +160,6 @@ namespace MarcelJoachimKloubert.IO
         public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
         {
             return _BASE_STREAM.BeginWrite(buffer, offset, count, callback, state);
-        }
-
-        /// <inheriteddoc />
-        public override void Close()
-        {
-            _BASE_STREAM.Close();
-        }
-
-        /// <inheriteddoc />
-        public override ObjRef CreateObjRef(Type requestedType)
-        {
-            return _BASE_STREAM.CreateObjRef(requestedType);
-        }
-
-        /// <inheriteddoc />
-        [Obsolete]
-        protected override WaitHandle CreateWaitHandle()
-        {
-            return InvokeProtectedMethod((wrapper) => wrapper.CreateWaitHandle());
         }
 
         /// <inheriteddoc />
@@ -239,12 +219,6 @@ namespace MarcelJoachimKloubert.IO
         public override int GetHashCode()
         {
             return _BASE_STREAM.GetHashCode();
-        }
-
-        /// <inheriteddoc />
-        public override object InitializeLifetimeService()
-        {
-            return _BASE_STREAM.InitializeLifetimeService();
         }
 
         /// <summary>
@@ -329,12 +303,6 @@ namespace MarcelJoachimKloubert.IO
                                                     x.GetParameters().SequenceEqual(methodParams))
                                         .Invoke(obj: _BASE_STREAM,
                                                 parameters: methodArgs);
-        }
-
-        /// <inheriteddoc />
-        protected override void ObjectInvariant()
-        {
-            InvokeProtectedMethod((wrapper) => wrapper.ObjectInvariant());
         }
 
         /// <inheriteddoc />
